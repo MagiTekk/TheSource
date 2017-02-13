@@ -2,13 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "VirtualityChallenge.h"
+#include "Static_assert.h"
 
 
 int main()
 {
-	VirtualityChallenge VC;
-	VC.Execute();
+	Static_assert SAS;
+	SAS.Execute();
     return 0;
 }
 
