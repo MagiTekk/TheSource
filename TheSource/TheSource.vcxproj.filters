@@ -54,6 +54,9 @@
     <ClInclude Include="Static_assert.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StringStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Static_assert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

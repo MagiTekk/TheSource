@@ -2,13 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "Static_assert.h"
+#include "StringStream.h"
 
 
 int main()
 {
-	Static_assert SAS;
-	SAS.Execute();
+	StringStream SS;
+	SS.Execute();
     return 0;
 }
 

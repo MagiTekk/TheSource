@@ -156,6 +156,7 @@
     <ClInclude Include="Static_assert.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringChallenge.h" />
+    <ClInclude Include="StringStream.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Uniqueptr.h" />
     <ClInclude Include="Verify.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Static_assert.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="StringChallenge.cpp" />
+    <ClCompile Include="StringStream.cpp" />
     <ClCompile Include="TheSource.cpp" />
     <ClCompile Include="Uniqueptr.cpp" />
     <ClCompile Include="Verify.cpp" />
