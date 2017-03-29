@@ -2,13 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "StringStream.h"
+#include "AttributeParser.h"
 
 
 int main()
 {
-	StringStream SS;
-	SS.Execute();
+	AttributeParser AP;
+	AP.Execute();
     return 0;
 }
 
