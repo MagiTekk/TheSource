@@ -3,10 +3,50 @@
 #include <string>
 #include <vector>
 
-
-AttributeParser::AttributeParser()
+class TagAttributes
 {
-}
+public:
+	TagAttributes(){}
+};
+
+class Tag
+{
+private:
+
+	std::string TagName;
+	std::string TagContents;
+	std::vector<Tag*> ChildrenTags;
+	std::vector<TagAttributes> TagAttributes;
+
+public:
+
+	Tag(std::string _TagName, std::string _TagContents)
+	{
+		TagName = _TagName;
+		TagContents = _TagContents;
+	}
+
+	bool HasChildren() const { return ChildrenTags.size() > 0; }
+
+	// Adds a new tag to our children
+	void AddChildTag(Tag* _NewChild)
+	{
+		ChildrenTags.push_back(_NewChild);
+	}
+
+	// Find any child tags given a tag name
+	Tag* FindChildTagByName(std::string _TagName)
+	{
+		for (auto TagRef : ChildrenTags)
+		{
+			if (TagRef->TagName == _TagName)
+			{
+				return TagRef;
+			}
+		}
+		return nullptr;
+	}
+};
 
 /*	
 	The opening tags follow the format:
@@ -31,11 +71,36 @@ AttributeParser::AttributeParser()
 	HelloWorld
 */
 
+std::string AttributeParser::FindTagName(std::string _TagLine, std::size_t _FoundTagPos)
+{
+	// Go to _FoundTagPos and copy each char until you have a space or eol
+	std::string TagName = "";
+
+	for (uint32_t i = _FoundTagPos; i < _TagLine.length(); ++i)
+	{
+		auto character = _TagLine[i];
+		if (!isspace(character) && (character != NULL) && (character != '\0') )
+		{
+			TagName.push_back(character);
+		}
+		else
+		{
+			break;
+		}
+	}
+	
+	return TagName;
+}
+
+AttributeParser::AttributeParser()
+{
+}
+
 void AttributeParser::Execute()
 {
 	std::cout << "Please insert the number of lines and number of queries. e.g. 2 1" << std::endl;
 
-	std::vector<std::string> HRMLTags;
+	std::vector<Tag*> HRMLTags;
 	std::vector<int> Queries;
 	int NumberOfLines;
 	int QueryAmount;
@@ -43,11 +108,18 @@ void AttributeParser::Execute()
 	// Read amount of tags and queries
 	std::cin >> NumberOfLines >> QueryAmount;
 
+	// Constraints
+	if (NumberOfLines < 1 || NumberOfLines > 20 || QueryAmount < 1 || QueryAmount > 20)
+	{
+		return;
+	}
+
 	// This will clear out the input buffer, in case we have any withespaces after reading the numbers
 	std::cin.clear();
 	std::cin.ignore(INT_MAX, '\n');
 
 	bool TagOpened = false;
+	Tag* StoredParentTag = nullptr;
 
 	// Read line
 	for (int i = 0; i < NumberOfLines; ++i)
@@ -65,7 +137,27 @@ void AttributeParser::Execute()
 		{
 			// Found a tag
 			std::cout << "Line is a tag" << std::endl;
-			HRMLTags.push_back(line);
+
+			if (TagOpened)
+			{
+				// This is a child Tag, get a reference to the parent tag and add it to the list
+				std::string TagName = FindTagName(line, foundTag);
+				Tag NewTag(TagName, line);
+				StoredParentTag->AddChildTag(&NewTag);
+			}
+			else
+			{
+				TagOpened = true;
+
+				// Find tag name using the starting pos on TagOpened
+				std::string TagName = FindTagName(line, foundTag);
+
+				// Create a new Tag
+				Tag NewTag(TagName, line);
+				HRMLTags.push_back(&NewTag);
+				StoredParentTag = (&NewTag);
+			}
+
 		}
 		else if (foundSlash == std::string::npos)
 		{
@@ -76,8 +168,17 @@ void AttributeParser::Execute()
 		{
 			// Line was an ending tag
 			std::cout << "line is an ending tag :: Line: " << line << std::endl;
+			TagOpened = false;
 		}
 	}
 
-	//std::cout << TagsAmount << " -- " << QueryAmount << std::endl;
+	// TODO: Process queries on the saved Tags
+	for (int i = 0; i < QueryAmount; ++i)
+	{
+
+	}
+
+	
 }
+
+
