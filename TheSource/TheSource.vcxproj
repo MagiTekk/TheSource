@@ -153,6 +153,7 @@
     <ClInclude Include="AttributeParser.h" />
     <ClInclude Include="BasicDataTypes.h" />
     <ClInclude Include="DynamicArrays.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Sharedptr.h" />
     <ClInclude Include="Static_assert.h" />
     <ClInclude Include="stdafx.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="AttributeParser.cpp" />
     <ClCompile Include="BasicDataTypes.cpp" />
     <ClCompile Include="DynamicArrays.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Sharedptr.cpp" />
     <ClCompile Include="Static_assert.cpp" />
     <ClCompile Include="stdafx.cpp" />

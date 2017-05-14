@@ -3,12 +3,13 @@
 
 #include "stdafx.h"
 #include "AttributeParser.h"
+#include "LinkedList.h"
 
 
 int main()
 {
-	AttributeParser AP;
-	AP.Execute();
+	LinkedList PROG;
+	PROG.Execute();
     return 0;
 }
 
